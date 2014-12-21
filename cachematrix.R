@@ -1,7 +1,11 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Following functions can calculate the inverse of a matrix, and
+## cache the data of the inverse and the matrix so that you don't
+## need to calculate again if you already have a cached data.
 
-## Write a short comment describing this function
+## makeCacheMatrix receives a matrix as an argument and can store
+## the matrix and its inverse by functions contained in the returned
+## list. The list also has functions, by which you can set a matrix
+## and get the matrix or the stored inverse of it.
 
 makeCacheMatrix <- function(x = matrix()) {
     i<-NULL
@@ -22,17 +26,19 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## cacheSolve receives an argument which is a returned list by 
+## makeCacheMatrix function. It checks the argument if it has
+## already calculated and cached the inverse, then it returns the 
+## cached inverse with a message or newly calculated inverse.
 
 cacheSolve <- function(x, ...) {
-    ## Return a matrix that is the inverse of 'x'
     i<-x$getinverse()
     if(!is.null(i)){
         message("getting cached data")
         return(i)
     }
-    mat<-x$get()
-    i<-solve(mat)
+    data<-x$get()
+    i<-solve(data)
     x$setinverse(i)
     i    
 }
